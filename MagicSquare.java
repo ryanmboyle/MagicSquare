@@ -31,22 +31,25 @@ public class MagicSquare
         System.out.println(size);
         String newNumbers = numbers.substring(1, numbers.length()-1);
         //System.out.println(newNumbers);
+        
         int r=0;
         int c=0;
-        int[] temporary = new int[size*size];
-        int z=0;
+        
         for(int i=1; i<newNumbers.length(); i+=(size*3)+2)
         {
-            for (int y=i; y<i+(size*2)+1; y+=3)
+            for (int y=i; y<i+(size*2)+3; y+=3)
             {
                 String stringNum = newNumbers.substring(y, y+1);
                 //System.out.println(stringNum);
                 int num = Integer.parseInt(stringNum);
                 //System.out.println(num);
-                temporary[z]=num;
-                System.out.print(temporary[z]);
-                z++;
+                
+                data[r][c] = num;
+                
+                c++;
             }
+            c=0;
+            r++;
         }
         
     }
@@ -64,11 +67,8 @@ public class MagicSquare
             }
             result += "\n";
         }
+        //  System.out.print(result);
         return result;
     }
     
-    public void main()
-    {
-        System.out.print(toString());
-    }
 }
