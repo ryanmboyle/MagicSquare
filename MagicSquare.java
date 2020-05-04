@@ -28,30 +28,45 @@ public class MagicSquare
         }
         int size = count+1;
         data = new int[size][size];
-        System.out.println(size);
-        String newNumbers = numbers.substring(1, numbers.length()-1);
-        //System.out.println(newNumbers);
+        //System.out.println(size);
         
         int r=0;
         int c=0;
         
-        for(int i=1; i<newNumbers.length(); i+=(size*3)+2)
+        
+        String newNumbers = numbers.substring(2, numbers.length()-1);
+        int j=1;
+        int i=0;
+        while (j<=size)
         {
-            for (int y=i; y<i+(size*2)+3; y+=3)
+            newNumbers = newNumbers.substring(i);
+            i=0;
+            int loc = newNumbers.indexOf("}");
+            
+            for (int y=0; y<loc; y+=3)
             {
-                String stringNum = newNumbers.substring(y, y+1);
-                //System.out.println(stringNum);
+                String stringNum = "";
+                if(newNumbers.substring(y+1, y+2).equals(",") || newNumbers.substring(y+1, y+2).equals("}"))
+                {
+                    stringNum += newNumbers.substring(y, y+1);
+                    
+                }
+                else
+                {
+                    stringNum += newNumbers.substring(y, y+2);
+                    //System.out.println(stringNum);
+                    y++;
+                    i++;
+                }
                 int num = Integer.parseInt(stringNum);
-                //System.out.println(num);
-                
                 data[r][c] = num;
-                
                 c++;
             }
             c=0;
             r++;
+            i += (size*3)+2;
+            j++;
         }
-        
     }
 
     public String toString()
@@ -67,7 +82,7 @@ public class MagicSquare
             }
             result += "\n";
         }
-        //  System.out.print(result);
+        System.out.print(result);
         return result;
     }
     
