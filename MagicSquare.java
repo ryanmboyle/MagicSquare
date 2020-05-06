@@ -68,6 +68,124 @@ public class MagicSquare
             j++;
         }
     }
+    
+    public boolean isMagic()
+    {
+        if(data.length==data[0].length && findOnce()==true && checkSums()==true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    public boolean checkSums()
+    {
+        int n = data.length;
+        double magicNum = 0.5*n*(2+n*n-1);
+        int count = 0;
+        int finalCount = (n*2)+2;
+        
+        //diagonal starting top left
+        int sum = 0;
+        for (int r=0; r<n; r++)
+        {
+            sum+=data[r][r];
+        }
+        if(sum==magicNum)
+        {
+            count++;
+        }
+        //System.out.println("diagonal top left: "+ sum);
+        
+        //diagonal starting top right
+        sum = 0;
+        int c=n-1;
+        for (int r=0; r<n; r++)
+        {
+            sum+=data[r][c];
+            c--;
+        }
+        if(sum==magicNum)
+        {
+            count++;
+        }
+        //System.out.println("diagonal top right: "+ sum);
+        
+        //horizontal
+        sum = 0;
+        for (int r=0; r<n; r++)
+        {
+            for (c=0; c<n; c++)
+            {
+                sum+=data[r][c];
+            }
+            //System.out.println("horizontal row " + r + ": " + sum);
+            if(sum==magicNum)
+            {
+                count++;
+            }
+            sum=0;
+        }
+        
+        //vertical
+        for (c=0; c<n; c++)
+        {
+            for (int r=0; r<n; r++)
+            {
+                sum+=data[r][c];
+            }
+            //System.out.println("vertical column " + c + ": " + sum);
+            if(sum==magicNum)
+            {
+                count++;
+            }
+            sum=0;
+        }
+        
+        //System.out.println("count: " + count);
+        if(count==finalCount)
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean findOnce()
+    {
+        int size = data.length;
+        boolean findOnce = true;
+        int i=1;
+        while(findOnce==true && i<=(size*size))
+        {
+            findOnce = false;
+            int count = 0;
+            for (int r=0; r<data.length; r++)
+            {
+                for (int c=0; c<data[0].length; c++)
+                {
+                    if(data[r][c]==i)
+                    {
+                        count++;
+                    }
+                }
+            }
+            if(count==1)
+            {
+                findOnce=true; 
+            }
+            i++;
+            }
+        if(i==size*size+1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public String toString()
     {
@@ -82,7 +200,7 @@ public class MagicSquare
             }
             result += "\n";
         }
-        System.out.print(result);
+        //System.out.print(result);
         return result;
     }
     
