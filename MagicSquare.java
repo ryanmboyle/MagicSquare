@@ -2,8 +2,8 @@
 /**
  * Write a description of class MagicSquare here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Ryan Boyle
+ * @version May 2020
  */
 public class MagicSquare
 {
@@ -12,7 +12,35 @@ public class MagicSquare
     
     public MagicSquare(int size)
     {
+        data = new int[size][size];
+        int[] shuffle = new int[size*size];
+        for (int i=0; i<shuffle.length; i++)
+        {
+            shuffle[i]=i+1;
+            //System.out.print(shuffle[i]+ ", ");
+        }
         
+        for(int i=shuffle.length-1; i>0; i--)
+        {
+            int randomPos = (int)(Math.random()*(i-1));
+            int copy = shuffle[randomPos];
+            shuffle[randomPos]=shuffle[i];
+            shuffle[i]=copy;
+        }
+        
+        //int r=0;
+        //int c=0;
+        int i=0;
+        for(int r=0; r<size; r++)
+        {
+            for(int c=0; c<size; c++)
+            {
+                data[r][c]=shuffle[i];
+                //System.out.print(data[r][c]+ "\t");
+                i++;
+            }
+            //i++;
+        }
     }
     
     public MagicSquare(String numbers)
